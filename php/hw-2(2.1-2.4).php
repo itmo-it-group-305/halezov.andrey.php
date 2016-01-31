@@ -1,5 +1,21 @@
 <?php
 
+#2.2
+
+$fairy = 62;
+$tarelka = 118;
+while ($fairy > 0 && $tarelka > 0) {
+    $tarelka--;
+    $fairy -= 0.5;
+    echo  $tarelka . '  тарелок' . ' и ' . $fairy . '   фери' . "<br>";
+}
+if ($tarelka == 0) {
+    echo "Посуда закончилась";
+} 
+else if ($cleaner == 0) {
+    echo "Фери закончился";
+}
+
 
 #2.3
 
@@ -60,3 +76,38 @@ $data = [
 	<?php endforeach; ?>
 </body>
 </html>
+
+
+
+<!-- 2.5 -->
+
+<?php
+$vk = array(
+	'user_id'=>'53083705',
+    'fields'=>'nickname, bdate',
+    'order'=>'random',
+);
+
+http_build_query($vk);
+$req = "https://api.vk.com/method/friends.get?" . http_build_query($vk);
+$content = file_get_contents($req);
+$resp = json_decode($content, true);
+$friends = $resp['response'];
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <?php foreach ($friends as $post): ?>
+        <div class="post">
+            <h1><?= $post['first_name'] . " " . $post['last_name'] ?></h1>
+            <p class="bdate"><?= "День рождения: " . $post['bdate']?></p>
+    	</div>
+	<?php endforeach; ?>
+</body>
+</html>
+
